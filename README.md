@@ -317,3 +317,90 @@ imageryLayers.addImageryProvider(
 </html>
 ```
 ---
+
+
+
+## 將重複的程式打包成函數存放在外部檔案
+
+前面 _index.html_ 中有兩段碼重複了，就像下面
+```js
+...
+imageryLayers.addImageryProvider(
+  new Cesium.WebMapServiceImageryProvider({
+    url:"http://127.0.0.1:8080/geoserver/my_app/wms",
+    layers: "my_app:base_img",
+    parameters: {
+      transparent: true,
+      format: "image/png",
+    },
+  })
+);
+
+imageryLayers.addImageryProvider(
+  new Cesium.WebMapServiceImageryProvider({
+    url: "http://127.0.0.1:8080/geoserver/my_app/wms",
+    layers: "my_app:poi",
+    parameters: {
+      transparent: true,
+      format: "image/png",
+    },
+  })
+);
+...
+```
+
+
+可以將其重新包裝成函數呼叫，就像這樣
+```js
+... 
+  
+function add_wms(viewer, url, layer) {
+    viewer.imageryLayers.addImageryProvider(
+        new Cesium.WebMapServiceImageryProvider({
+            url: url,
+            layers: layer,
+            parameters: {
+                transparent: true,
+                format: "image/png",
+            },
+        })
+    );
+}
+wms_url = "http://127.0.0.1:8080/geoserver/my_app/wms";
+add_wms(viewer, wms_url, "my_app:base_img");
+add_wms(viewer, wms_url, "my_app:poi");
+
+...
+```
+
+
+其中函數 _add_wms(viewer, url, layer)_ 可以集中到另一個檔案之中，例如 _funs.js_  
+```js
+function add_wms(viewer, url, layer) {
+  viewer.imageryLayers.addImageryProvider(
+    new Cesium.WebMapServiceImageryProvider({
+      url: url,
+      layers: layer,
+      parameters: {
+        transparent: true,
+        format: "image/png",
+      },
+    })
+  );
+}
+```
+
+在 _index.html_ 中將 _funs.js_ 引入使用  
+```html
+...
+        }
+    </style>
+    <script src="funs.js"></script>
+</head>
+
+...
+
+```
+這樣就可以將程式邏輯與介面分離儲存，方便後續開發。
+
+---
