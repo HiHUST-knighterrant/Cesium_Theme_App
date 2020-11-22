@@ -170,3 +170,150 @@ Connection Parameters ➡️ URL: ➡️ 🖱️ __Browse...__ ➡️ _file:data
 熱鍵 <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd> 開啟 __Command Palette__，輸入 _Live Server: Open with Live Server_ 然後 <kbd>Enter</kbd>，將自動開啟網頁顯示目前成果。
 
 ---  
+
+
+## 加入WMS
+
+GeoServer預設是將WMS服務發布在URL: _http://<server_ip>:\<port> /geoserver/<workspace_name>/wms_ 下，Layer名稱為 _<workspace_name>:<layer_name>_  
+
+下面程式展示了如何加入一個本機發布的WMS圖層( _"http://127.0.0.1:8080/geoserver/my_app/wms"_ )，圖曾為 _my_app:poi_ ，並且底色為透明( _transparent: true_ )。
+
+```js
+// Add a WMS imagery layer
+var imageryLayers = viewer.imageryLayers;
+imageryLayers.addImageryProvider(
+  new Cesium.WebMapServiceImageryProvider({
+    url: "http://127.0.0.1:8080/geoserver/my_app/wms",
+    layers: "my_app:poi",
+    parameters: {
+      transparent: true,
+      format: "image/png",
+    },
+  })
+);
+// Set the camera
+viewer.camera.setView({
+  destination: Cesium.Rectangle.fromDegrees(
+    120, 22,
+    122, 26
+  ),
+});
+```
+將上方程式碼加到 _index.html_ 中
+
+```js
+...    
+  var viewer = new Cesium.Viewer('cesiumContainer', {
+    imageryProvider: new Cesium.TileMapServiceImageryProvider({
+      url: Cesium.buildModuleUrl('Assets/Textures/NaturalEarthII')
+    }),
+    baseLayerPicker: false,
+    geocoder: false
+  });
+
+// 將程式碼加到這後面
+// ...
+
+...
+```
+
+[預覽一下](http://127.0.0.1:5500/index.html)
+
+再加入一層採用 __GeoTIFF 格式__ 發布的WMS( _my_app:base_img_ )
+
+```js
+imageryLayers.addImageryProvider(
+  new Cesium.WebMapServiceImageryProvider({
+    url: "http://127.0.0.1:8080/geoserver/my_app/wms",
+    layers: "my_app:base_img",
+    parameters: {
+      transparent: true,
+      format: "image/png",
+    },
+  })
+);
+```
+因為先加入的WMS會在底部，所以要加在前面的 _poi WMS_ 之前，才不會蓋住 _poi_。
+
+```js
+...    
+  // Add a WMS imagery layer
+  var imageryLayers = viewer.imageryLayers;
+// 將程式碼加到這後面
+// ...
+// 這之前
+  imageryLayers.addImageryProvider(
+...
+```
+[預覽一下](http://127.0.0.1:5500/index.html)
+
+完整的 _index.html_ 內容
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <script src="Cesium/Cesium.js"></script>
+  <link href="Cesium/Widgets/widgets.css" rel="stylesheet">
+  <style>
+      html,
+      body,
+      #cesiumContainer {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+      }
+  </style>
+</head>
+
+<body>
+  <div id="cesiumContainer"></div>
+  <script>
+      var viewer = new Cesium.Viewer('cesiumContainer', {
+        imageryProvider: new Cesium.TileMapServiceImageryProvider({
+          url: Cesium.buildModuleUrl('Assets/Textures/NaturalEarthII')
+        }),
+        baseLayerPicker: false,
+        geocoder: false
+      });
+
+      // Add a WMS imagery layer
+      var imageryLayers = viewer.imageryLayers;
+
+      imageryLayers.addImageryProvider(
+        new Cesium.WebMapServiceImageryProvider({
+          url:"http://127.0.0.1:8080/geoserver/my_app/wms",
+          layers: "my_app:base_img",
+          parameters: {
+            transparent: true,
+            format: "image/png",
+          },
+        })
+      );
+
+      imageryLayers.addImageryProvider(
+        new Cesium.WebMapServiceImageryProvider({
+          url: "http://127.0.0.1:8080/geoserver/my_app/wms",
+          layers: "my_app:poi",
+          parameters: {
+            transparent: true,
+            format: "image/png",
+          },
+        })
+      );
+
+      viewer.camera.setView({
+        destination: Cesium.Rectangle.fromDegrees(
+          120, 22,
+          122, 26
+        ),
+      });
+  </script>
+</body>
+
+</html>
+```
+---
