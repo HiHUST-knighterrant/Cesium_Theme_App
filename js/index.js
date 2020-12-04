@@ -6,7 +6,7 @@ var viewer = new Cesium.Viewer('cesiumContainer', {
   // geocoder: false
 });
 
-add_qtiles(viewer, 'layers/qtiles', 'jpg');
+add_3d_tileset(viewer, 'layers/3d_tileset/tileset.json', true);
 
 
 viewer.camera.setView({
