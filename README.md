@@ -4,24 +4,23 @@
 
 ### 前端
 
-* CesiumJS
-    [函式庫](https://github.com/CesiumGS/cesium/releases/download/1.75/Cesium-1.75.zip)
-    [官網](https://cesium.com/cesiumjs/)
-    [教學](https://cesium.com/docs/)
+* [CesiumJS](https://cesium.com/cesiumjs/)  
+    [函式庫](https://github.com/CesiumGS/cesium/releases/download/1.75/Cesium-1.75.zip)  
+    [教學](https://cesium.com/docs/)  
     [測試](https://sandcastle.cesium.com/)
-* Bootstrap
+* [Bootstrap](https://getbootstrap.com/)
 
 ### 後端
 
-* GeoServer 2.18
-    [Zip](http://sourceforge.net/projects/geoserver/files/GeoServer/2.18.0/geoserver-2.18.0-bin.zip)
+* [GeoServer](http://geoserver.org/)  
+    [2.18 Zip](http://sourceforge.net/projects/geoserver/files/GeoServer/2.18.0/geoserver-2.18.0-bin.zip)  
     [AdoptOpenJDK JRE 8](https://adoptopenjdk.net/releases.html?variant=openjdk8&jvmVariant=hotspot)
   * JRE安裝路徑： _C:\Program Files\AdoptOpenJDK\jre-8.0.275.1-hotspot\\_
   * 安裝JRE時，設定 _JAVA_HOME_ 環境變數
   * GeoServer安裝路徑： _C:\geoserver_
   * [開啟GeoServer CORS](https://docs.geoserver.org/stable/en/user/production/container.html#enable-cors)，提供跨網域存取
   * 執行 _geoserver/bin/startup.bat_ 啟動伺服器
-* Flask
+* [Flask](https://flask.palletsprojects.com/en/1.1.x/)
 
 ---
 
@@ -44,25 +43,25 @@
   * 密碼: _geoserver_
 
 * 新增 Workspace ( 已經有了就不用重複新增 )
-  * Data ➡️ 🖱️ __Workspaces__ ➡️ 🖱️ __Add new workspace__
-  * Name: _my_app_ ➡️ 🖱️ __Save__
+  * Data ➡ 🖱️ __Workspaces__ ➡ 🖱️ __Add new workspace__
+  * Name: _my_app_ ➡ 🖱️ __Save__
   
 * 新增 Store
   * 假設檔名為 _poi.shp_
-  * Data ➡️ 🖱️ __Stores__ ➡️ 🖱️ __Add new Store__
-  * Vector Data Sources ➡️ 🖱️ __Shapefile__
+  * Data ➡ 🖱️ __Stores__ ➡ 🖱️ __Add new Store__
+  * Vector Data Sources ➡ 🖱️ __Shapefile__
   * Workspace: _my_app_  
 Data Source Name: _poi_  
-Shapefile location: ➡️ 🖱️ __Browse...__ ➡️ _file:data/my_app/poi.shp_ ➡️ 🖱️ __Save__
+Shapefile location: ➡ 🖱️ __Browse...__ ➡ _file:data/my_app/poi.shp_ ➡ 🖱️ __Save__
 
 * 新增 Layer
-  * Data ➡️ 🖱️ __Layers__ ➡️ 🖱️ __Add a new layer__
+  * Data ➡ 🖱️ __Layers__ ➡ 🖱️ __Add a new layer__
   * Add layer from: 🖱️ __my_app:poi__
-  * New Layer ➡️ Layer name: _poi_ ➡️ Action: 🖱️ __Publish__  
-  * Edit Layer ➡️ Bounding Boxes ➡️ 🖱️ __Compute from data__ ➡️ 🖱️ __Compute from native bounds__ ➡️ 🖱️ __Save__
+  * New Layer ➡ Layer name: _poi_ ➡ Action: 🖱️ __Publish__  
+  * Edit Layer ➡ Bounding Boxes ➡ 🖱️ __Compute from data__ ➡ 🖱️ __Compute from native bounds__ ➡ 🖱️ __Save__
 
 * 預覽 Layer
-  * Data ➡️ 🖱️ __Layer Preview__ ➡️ Name: _my_app:poi_ ➡️ Common Formats: 🖱️ __OpenLayers__
+  * Data ➡ 🖱️ __Layer Preview__ ➡ Name: _my_app:poi_ ➡ Common Formats: 🖱️ __OpenLayers__
 
 ---
 ### 準備 GeoTIFF
@@ -76,20 +75,20 @@ Shapefile location: ➡️ 🖱️ __Browse...__ ➡️ _file:data/my_app/poi.sh
   
 * 新增 Store
   * 假設檔名為 _base_image.tif_
-  * Data ➡️ 🖱️ __Stores__ ➡️ 🖱️ __Add new Store__
-  * Raster Data Sources ➡️ 🖱️ __GeoTIFF__
+  * Data ➡ 🖱️ __Stores__ ➡ 🖱️ __Add new Store__
+  * Raster Data Sources ➡ 🖱️ __GeoTIFF__
   * Workspace: _my_app_  
 Data Source Name: _base_img_  
-Connection Parameters ➡️ URL: ➡️ 🖱️ __Browse...__ ➡️ _file:data/my_app/base_image.tif_ ➡️ 🖱️ __Save__
+Connection Parameters ➡ URL: ➡ 🖱️ __Browse...__ ➡ _file:data/my_app/base_image.tif_ ➡ 🖱️ __Save__
 
 * 新增 Layer
-  * Data ➡️ 🖱️ __Layers__ ➡️ 🖱️ __Add a new layer__
+  * Data ➡ 🖱️ __Layers__ ➡ 🖱️ __Add a new layer__
   * Add layer from: 🖱️ __my_app:base_img__
-  * New Layer ➡️ Layer name: _base_image_ ➡️ Action: 🖱️ __Publish__  
-  * Edit Layer ➡️ 🖱️ __Save__
+  * New Layer ➡ Layer name: _base_image_ ➡ Action: 🖱️ __Publish__  
+  * Edit Layer ➡ 🖱️ __Save__
 
 * 預覽 Layer
-  * Data ➡️ 🖱️ __Layer Preview__ ➡️ Name: _my_app:base_img_ ➡️ Common Formats: 🖱️ __OpenLayers__
+  * Data ➡ 🖱️ __Layer Preview__ ➡ Name: _my_app:base_img_ ➡ Common Formats: 🖱️ __OpenLayers__
 
 ---
 ## 準備開發環境
@@ -404,3 +403,88 @@ function add_wms(viewer, url, layer) {
 這樣就可以將程式邏輯與介面分離儲存，方便後續開發。
 
 ---
+
+
+## 分類儲存
+### 整理現有的程式架構
+- 增加一個名為 *css* 的目錄，並在下面建一個 *index.css* 檔案
+- 將 *index.html* 中 **head** 部分的 **style** 標籤 ***裡面的內容 ( 不含標籤\<style>及\</style> )*** 移到 *css* 目錄下的 *index.css* 檔案裡面
+
+```css
+html,
+body,
+#cesiumContainer {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+```
+- 原來的標籤改成載入 *css/index.css* 檔案的描述
+```html
+<link href="css/index.css" rel="stylesheet">
+```
+- [測試看看有沒有問題](http://127.0.0.1:5500/index.html)  
+---
+
+
+- 增加一個名為 *js* 的目錄，並在下面建一個 *index.js* 檔案
+- 將 *index.html* 中的 **body** 部分 **script** 標籤 ***裡面的內容*** 移到 *js* 目錄下的 *index.js* 檔案裡面
+
+```js
+var viewer = new Cesium.Viewer('cesiumContainer', {
+  imageryProvider: new Cesium.TileMapServiceImageryProvider({
+      url: Cesium.buildModuleUrl('Assets/Textures/NaturalEarthII')
+  }),
+  baseLayerPicker: false,
+  geocoder: false
+});
+
+wms_url = "http://127.0.0.1:8080/geoserver/my_app/wms";
+add_wms(viewer, wms_url, "my_app:base_img");
+add_wms(viewer, wms_url, "my_app:poi");
+
+viewer.camera.setView({
+  destination: Cesium.Rectangle.fromDegrees(
+      120, 22,
+      122, 26
+  ),
+});
+```
+- 原來的標籤改成載入 *js/index.js* 檔案的描述
+```html
+<script src="js/index.js"></script>
+```
+- [測試看看有沒有問題](http://127.0.0.1:5500/index.html)
+---
+
+
+- 將 *funs.js* 檔案，更名為 *add_wms.js* ，並移到 *js* 目錄下
+- 將 *index.html* 中的載入 *funs.js* 的標籤
+
+```html
+<script src="funs.js"></script>
+```
+- 改成
+```html
+<script src="js/add_wms.js"></script>
+```
+- [測試看看有沒有問題](http://127.0.0.1:5500/index.html)
+---
+現在完成分類儲存了
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
