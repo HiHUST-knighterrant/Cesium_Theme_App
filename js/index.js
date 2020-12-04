@@ -6,15 +6,12 @@ var viewer = new Cesium.Viewer('cesiumContainer', {
   // geocoder: false
 });
 
-// method 1
-add_tms(viewer, 'layers/tms');
+add_qtiles(viewer, 'layers/qtiles', 'jpg');
 
-// method 2
-// add_tms_url_template(viewer, 'layers/tms');
 
 viewer.camera.setView({
   destination: Cesium.Rectangle.fromDegrees(
-    121.810, 24.60,
-    121.820, 24.61
+    121.0, 23.5,
+    122.3, 24.2
   ),
 });      
