@@ -1,0 +1,10 @@
+#infobox {
+  position: absolute;
+  top: 30px;
+  left: 30px;
+  font-size: 16px;
+  z-index: 99;
+  padding: 10px 20px;
+  background-color: rgba(241, 178, 120, 0.959);
+  border: 1px solid #cccccc;
+}

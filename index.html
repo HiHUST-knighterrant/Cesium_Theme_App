@@ -6,12 +6,31 @@
     <script src="Cesium/Cesium.js"></script>
     <link href="Cesium/Widgets/widgets.css" rel="stylesheet">
     <link href="css/index.css" rel="stylesheet">
-    <script src="js/add_3d_tileset.js"></script>
+    <link href="css/info_box.css" rel="stylesheet">
 </head>
 
 <body>
     <div id="cesiumContainer"></div>
     <script src="js/index.js"></script>
+
+
+    <table id="infobox">
+        <tbody>
+            <tr>
+                <td class="header">Camera Position</td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="text" size="10" data-bind="value: x">
+                </td>
+                <td>
+                    <input type="text" size="10" data-bind="value: y">
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script src="js/add_info_box.js"></script>
 </body>
 
 </html>
