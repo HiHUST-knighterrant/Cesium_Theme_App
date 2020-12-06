@@ -36,13 +36,13 @@ handler.setInputAction(function (event) {
 }, Cesium.ScreenSpaceEventType.LEFT_CLICK);
 
 
-wms_url = "http://127.0.0.1:8080/geoserver/my_app/wms";
-add_wms(viewer, wms_url, "my_app:base_img");
-add_wms_get_features(viewer, wms_url, "my_app:poi", show_chart);
+// wms_url = "http://127.0.0.1:8080/geoserver/my_app/wms";
+// add_wms(viewer, wms_url, "my_app:base_img");
+// add_wms_get_features(viewer, wms_url, "my_app:poi", show_chart);
 
-viewer.camera.setView({
-  destination: Cesium.Rectangle.fromDegrees(
-      121.810, 24.60,
-      121.820, 24.61
-  ),
-});
+// viewer.camera.setView({
+//   destination: Cesium.Rectangle.fromDegrees(
+//       121.810, 24.60,
+//       121.820, 24.61
+//   ),
+// });
