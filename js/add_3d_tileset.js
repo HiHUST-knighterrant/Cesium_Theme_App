@@ -21,4 +21,5 @@ function add_3d_tileset(viewer, url, fly_to) {
     .otherwise(function (error) {
       console.log(error);
     });
+  return tilesets;
 }

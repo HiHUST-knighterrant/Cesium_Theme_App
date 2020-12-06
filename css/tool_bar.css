@@ -1,0 +1,10 @@
+#tool_bar {
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    font-size: 16px;
+    z-index: 99;
+    padding: 10px 10px;
+    /* background-color: rgba(189, 226, 52, 0.5); */
+    border: 1px solid #cccccc;
+}
