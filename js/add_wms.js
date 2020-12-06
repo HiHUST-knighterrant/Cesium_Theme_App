@@ -1,5 +1,5 @@
 function add_wms(viewer, url, layer) {
-    viewer.imageryLayers.addImageryProvider(
+    return viewer.imageryLayers.addImageryProvider(
         new Cesium.WebMapServiceImageryProvider({
             url: url,
             layers: layer,
