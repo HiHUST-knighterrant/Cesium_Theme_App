@@ -14,6 +14,7 @@ function show_chart(data) {
         `);
 
     let log_items = Object.entries(items).filter(i => !isNaN(Number(i[0])));
+
     g = new Dygraph(
       document.getElementById("graphdiv"),
       "Date,Displacement\n" + log_items.join('\n'),
@@ -25,6 +26,51 @@ function show_chart(data) {
   }
 }
 
+
+function show_chart_with_geojson(data) {
+  try {
+    if (data.properties.length == 0) return;
+
+    let chart = new CesiumPopup({}).setPosition(click_pos).addTo(viewer);
+
+    let items = data.properties;
+    chart.setTitle(`Feature ID: ${items.ID}`);
+    chart.setHTML(`
+        <div id="graphdiv"></div><br>
+        Mean Velocity: ${items.VEL}<br>
+        `);
+
+    let log_items_key = items.propertyNames.filter(
+      name => !isNaN(Date.parse(name)));
+
+    let log_items = [];
+    log_items_key.forEach(
+      key => log_items.push([key, items[key]._value])
+    );
+
+    g = new Dygraph(
+      document.getElementById("graphdiv"),
+      "Date,Displacement\n" + log_items.join('\n'),
+      { width: 400, height: 200 }
+    );
+
+  } catch (error) {
+
+  }
+}
+
+
+function pickEntity(viewer, windowPosition) {
+  var picked = viewer.scene.pick(windowPosition);
+  if (Cesium.defined(picked)) {
+    var id = Cesium.defaultValue(picked.id, picked.primitive.id);
+    if (id instanceof Cesium.Entity) {
+      return id;
+    }
+  }
+  return undefined;
+};
+
 var handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
 handler.setInputAction(function (event) {
 
@@ -32,6 +78,13 @@ handler.setInputAction(function (event) {
     event.position,
     viewer.scene.globe.ellipsoid
   );
+
+
+  entity = pickEntity(viewer, event.position);
+  if (Cesium.defined(entity)) {
+    click_pos = entity.position._value;
+    show_chart_with_geojson(entity);
+  }
 
 }, Cesium.ScreenSpaceEventType.LEFT_CLICK);
 
